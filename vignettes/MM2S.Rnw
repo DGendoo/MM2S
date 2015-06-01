@@ -1,0 +1,193 @@
+%\VignetteIndexEntry{MM2S An Introduction (HowTo)}
+%\VignetteDepends{GSVA, kknn, lattice, pheatmap}
+%\VignetteSuggests{MM2Sdata}
+%\VignetteKeywords{Medulloblastoma, Diagnosis, Cancer, Subtype, Classification}
+%\VignettePackage{MM2S}
+%\VignetteEngine{knitr::knitr}
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage[latin1]{inputenc}
+\usepackage{geometry}
+\usepackage{authblk}
+\geometry{verbose,tmargin=2.5cm,bmargin=2.5cm,lmargin=2.5cm,rmargin=2.5cm}
+\usepackage[table]{xcolor}
+
+
+%------------------------------------------------------------
+% newcommand
+%------------------------------------------------------------
+\newcommand{\scscst}{\scriptscriptstyle}
+\newcommand{\scst}{\scriptstyle}
+\newcommand{\Robject}[1]{{\texttt{#1}}}
+\newcommand{\Rfunction}[1]{{\texttt{#1}}}
+\newcommand{\Rclass}[1]{\textit{#1}}
+\newcommand{\Rpackage}[1]{\textit{#1}}
+\newcommand{\Rexpression}[1]{\texttt{#1}}
+\newcommand{\Rmethod}[1]{{\texttt{#1}}}
+\newcommand{\Rfunarg}[1]{{\texttt{#1}}}
+
+\begin{document}
+
+\title{\Rpackage{MM2S}: a package for Medulloblastoma Subtype Predictions}
+\author[1]{Deena M.A. Gendoo\thanks{deena.gendoo@utoronto.ca}}
+\author[1]{Benjamin Haibe-Kains\thanks{benjamin.haibe.kains@utoronto.ca }}
+\affil[1]{Bioinformatics and Computational Genomics Laboratory, Princess Margaret Cancer Center, University Health Network, Toronto, Ontario, Canada}
+\affil[2]{Medical Biophysics Department, University of Toronto, Toronto, Ontario, Canada}
+
+%<<setup,echo=FALSE>>=
+%library(pgfSweave)
+%setCacheDir("cache")
+%options(keep.source=TRUE)
+%@
+
+\maketitle
+\tableofcontents
+
+%------------------------------------------------------------
+\section{Introduction}
+%------------------------------------------------------------ 
+The MM2S package is providing relevant functions for subtype prediction of Medulloblastoma primary samples, mouse models, and cell lines. 
+
+MM2S is single-sample classifier that generates Medulloblastoma (MB) subtype predictions for single-samples of human MB patients and model systems, including cell lines and mouse-models. The MM2S algorithm uses a systems-based methodology that faciliates application of the algorithm on samples irrespective of their platform or source of origin. MM2S demonstrates >96 percent accuracy for patients of well-characterized normal cerebellum, WNT, or SHH subtypes, and the less-characterized Group4 (86 percent) and Group3 (78.2 percent). 
+MM2S also enables classification of MB cell lines and mouse models into their human counterparts.This package contains function for implementing the classifier onto human data and mouse data, as well as graphical rendering of the results as PCA plots and heatmaps. 
+%------------------------------------------------------------
+\section{Loading package for case studies}
+%------------------------------------------------------------ 
+First we load the MM2S and MM2Sdata packages into the workspace. 
+Both packages are publicly available and can be installed from Bioconductor version 2.8 or higher in R version 2.13.0 or higher. To locate the packages:
+
+\begin{description}
+\item http://www.bioconductor.org/packages/release/data/experiment/html/MM2S.html
+\item http://www.bioconductor.org/packages/release/data/experiment/html/MM2Sdata.html
+\end{description}
+
+The MM2Sdata package contains is a companion datasets that will be used for the examples in the following case studies. 
+The MM2Sdata package contains ExpressionSet objects of both Human and Mouse model Medulloblastoma. 
+The package contains the following ExpressionSets:
+
+\begin{description}
+\item GSE36594expr: Gene expression for 56 Medulloblastoma mouse samples, of which 32 are sample replicates for the GTML mouse model. 
+\item GSE37418Expr: Gene expression for 76 primary Medulloblastoma human samples
+\end{description}
+
+Please consult the manual of the MM2Sdata package for more details. 
+
+<<installAndLoadPackages,eval=TRUE>>=
+library(MM2S)
+#source("http://www.bioconductor.org/biocLite.R")
+#biocLite("MM2Sdata")
+library(MM2Sdata)
+@
+
+%------------------------------------------------------------
+\section{Case Study 1: Predicting Human Subtype Counterparts for Mouse Models}
+%------------------------------------------------------------ 
+
+We first load the Mouse model dataset from GSE36594. We select all samples pertaining to the GTML mouse model. 
+There are 32 sample replicates for this mouse model, all of which are labelled as GTML in the GEO series. 
+We select for those samples and perform MM2S predictions on them. 
+<<findMouseModelSubtypes>>=
+data(GSE36594Expr)
+ExprMat<-exprs(GSE36594Expr)
+GTML<-ExprMat[,grep("GTML_MB",(colnames(exprs(GSE36594Expr))))]
+
+#Change mouse sample names for clarity
+for(sample in 1:ncol(GTML))
+{
+  newnames<-strsplit(x=(colnames(GTML)[sample]),split="_")[[1]][1]
+  colnames(GTML)[sample]<-newnames
+}
+
+# Conduct Subtype Predictions for those particular replicates, save results in a XLS file
+GTMLPreds<-MM2S_Mouse(InputMatrix=GTML,xls_output=TRUE,parallelize=1)
+@
+
+Now we can view the predictions for the GTML sample replicates in more detail. 
+We first generate heatmap of MM2S confidence predictions for each sample replicate. 
+<<GeneratePredictionHeatmap,echo=TRUE>>=
+# Now generate a heatmap of the predictions and save the results in a PDF file.  
+# This indicates MM2S confidence perdictions for each sample replicate of the GMTL model. 
+# We view the first 20 samples here. 
+PredictionsHeatmap(InputMatrix=GTMLPreds$Predictions[1:20,],pdf_output=TRUE,pdfheight=12,pdfwidth=10)
+
+# NB: Output may appear on multiple pages
+@
+
+We observe that the majority of sample replicates strongly predict as Group3, suggesting the potential for a non-SHH mouse model. 
+However, some samples also predict as either SHH or Normal. Further investigation would need to performed on these samples. 
+To invesitage further, we can graphically visualize different sample replicates and their nearest human MB neighbors 
+from the MM2S training set using Principal Component Analysis (PCA). 
+
+Three PDF files are generated which renders PC1 vs PC2, PC2 vs PC3, and a lattice plot of PC1-PC3. 
+<<PCARenderingOfPredictions,echo=TRUE>>=
+PCARender(GSVAmatrixTesting=GTMLPreds$RankMatrixTesting, 
+          GSVAmatrixTraining=GTMLPreds$RankMatrixTraining)
+@
+
+%------------------------------------------------------------
+%%% CODE Stop
+%------------------------------------------------------------
+
+\newpage
+
+%------------------------------------------------------------
+\section{Case Study 2: Predict Human Subtypes for Primary Patient Samples}
+%------------------------------------------------------------ 
+We first load the gene expression data of 76 primary human patient tumours from GSE37418, 
+and conduct MM2S subtype predictions on them. 
+
+<<findHumanModelSubtypes>>=
+data(GSE37418Expr)
+HumanExpr<-exprs(GSE37418Expr)
+# Conduct Subtype Predictions for all samples, save results in a XLS file
+# [This will take a few minutes to compute]
+HumanPreds<-MM2S_Human(InputMatrix=HumanExpr,xls_output=TRUE,parallelize=1)
+@
+
+We can compare MM2S predictions against known subtype predictions of the samples.
+These subtype predictions are obtained from the Gene Expression Omnibus (GEO). 
+<<ComparePredictions,echo=TRUE>>=
+# We first assess the distribution of the known subtypes for the 76 samples.
+table(pData(GSE37418Expr)$characteristics_ch1)
+# We now assess the distribtuion of MM2S predicted subtypes for the 76 samples. 
+table(HumanPreds$MM2S_Subtype[,2])
+# Side-by-side comparison of MM2S predictions and pre-determined subtypes across all samples
+# first check that all samples are matching in the pData and MM2S
+all(HumanPreds$MM2S_Subtype[,1] == rownames(pData(GSE37418Expr)))
+# then generate comparisons
+ComparisonTable<-cbind(Sample=rownames(pData(GSE37418Expr)),
+                       Original=as.character(pData(GSE37418Expr)$characteristics_ch1),MM2S=HumanPreds$MM2S_Subtype[,2])
+# We view the first 15 samples here
+ComparisonTable[1:15,]
+@
+
+We can easily generate a heatmap of all predictions, 
+as well as PCA plots for our given samples against the MM2S training set. 
+<<GeneratePredictionHeatmapAndPCARendering,echo=TRUE>>=
+# Now generate a heatmap of the predictions and save the results in a PDF file.  
+# This indicates MM2S confidence perdictions for each sample. 
+# We can view the first 20 sample replicates. 
+PredictionsHeatmap(InputMatrix=HumanPreds$Predictions[1:20,],pdf_output=TRUE,pdfheight=10,pdfwidth=5)
+
+# NB: Output may appear on multiple pages
+
+# We can graphically visualize different sample replicates and their nearest human MB neighbors 
+# from the MM2S training set using Principal Component Analysis (PCA). 
+PCARender(GSVAmatrixTesting=HumanPreds$RankMatrixTesting, 
+          GSVAmatrixTraining=HumanPreds$RankMatrixTraining)
+@
+
+
+
+
+\newpage
+%------------------------------------------------------------
+\section{Session Info}
+%------------------------------------------------------------ 
+<<sessionInfo,echo=FALSE,results="tex">>==
+toLatex(sessionInfo())
+@
+
+\end{document}
