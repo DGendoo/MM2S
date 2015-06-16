@@ -27,7 +27,10 @@ Gene Expression data (formatted and normalized using BrainArray CDFs) for 10 sel
 CHO dataset: Y.J. Cho, A. Tsherniak, P. Tamayo, S. Santagata, A. Ligon, H. Greulich, R. Berhoukim, V. Amani, L. Goumnerova, C.G. Eberhart, C.C. Lau, J.M. Olson, R.J. Gilbertson, A. Gajjar, O. Delattre, M. Kool, K. Ligon, M. Meyerson, J.P. Mesirov, S.L. Pomeroy, Integrative genomic analysis of medulloblastoma identifies a molecular subgroup that drives poor clinical outcome, J Clin Oncol, 29 (2011) 1424-1430.
 }
 \references{
-Gendoo DMA, Smirnov P, Lupien M, Haibe-Kains B, (2014) "Personalized Diagnosis of Medulloblastoma Across Patients and Model Systems", \emph{Genomics}, \bold{14}(16):5158--5165.
+Gendoo, D. M., Smirnov, P., Lupien, M. & Haibe-Kains, B. Personalized diagnosis of medulloblastoma subtypes across patients and model systems. 
+Genomics, doi:10.1016/j.ygeno.2015.05.002 (2015)
+
+Manuscript URL: http://www.sciencedirect.com/science/article/pii/S0888754315000774
 }
 \examples{
 data(Human_Cho_Expr)

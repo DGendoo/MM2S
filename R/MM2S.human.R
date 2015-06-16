@@ -1,6 +1,17 @@
+# Deena M.A. Gendoo
+# October 29, 2014
+# Code to conduct MM2S prediction on human samples
+
+# DISCLAIMER:
+# MM2S package (and its code components) is provided "AS-IS" and without any warranty of any kind. 
+# In no event shall the University Health Network (UHN) or the authors be liable for any consequential damage of any kind, 
+# or any damages resulting from the use of this MM2S.
+
+#################################################################################
+#################################################################################
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("HumanGMT", "genesetHuman","Frozen_ES_Rank_Matrix","MB_SampleInfo"))
 
-MM2S_Human<-function(InputMatrix,xls_output,parallelize)
+MM2S.human<-function(InputMatrix,xls_output,parallelize)
 {
   set.seed(12345)
   options(warn=-1)

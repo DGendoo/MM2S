@@ -26,7 +26,10 @@ PCARender(GSVAmatrixTesting,GSVAmatrixTraining)
   Lattice: Lattice matrix with the projections onto PCA1-PC3
 }
 \references{
-Gendoo DMA, Smirnov P, Lupien M, Haibe-Kains B, (2014) "Personalized Diagnosis of Medulloblastoma Across Patients and Model Systems", \emph{Genomics}, \bold{14}(16):5158--5165.
+Gendoo, D. M., Smirnov, P., Lupien, M. & Haibe-Kains, B. Personalized diagnosis of medulloblastoma subtypes across patients and model systems. 
+Genomics, doi:10.1016/j.ygeno.2015.05.002 (2015)
+
+Manuscript URL: http://www.sciencedirect.com/science/article/pii/S0888754315000774
 }
 \author{
 Deena M.A. Gendoo
@@ -41,7 +44,7 @@ Deena M.A. Gendoo
 # Running raw expression data through MM2S
 ## load Mouse gene expression data for the potential WNT mouse model
 data(WNT_Mouse_Expr)
-SubtypePreds<-MM2S_Mouse(InputMatrix=WNT_Mouse_Expr,xls_output=TRUE,parallelize=1)
+SubtypePreds<-MM2S.mouse(InputMatrix=WNT_Mouse_Expr[2:3],xls_output=TRUE,parallelize=1)
 ## Generate Heatmap
 PCARender(GSVAmatrixTesting=SubtypePreds$RankMatrixTesting,
 GSVAmatrixTraining=SubtypePreds$RankMatrixTraining)

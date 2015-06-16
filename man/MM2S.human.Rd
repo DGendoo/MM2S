@@ -1,5 +1,5 @@
-\name{MM2S_Human}
-\alias{MM2S_Human}
+\name{MM2S.human}
+\alias{MM2S.human}
 \title{
 MM2S Prediction of Human Medulloblastoma Samples
 }
@@ -8,7 +8,7 @@ This function generates MM2S subtype predictions for human samples of interest.
 Users are provided the option to save this the predictions as a XLS file. 
 }
 \usage{
-MM2S_Human(InputMatrix,xls_output,parallelize)
+MM2S.human(InputMatrix,xls_output,parallelize)
 }
 \arguments{
   \item{InputMatrix}{Matrix containing normalized gene expression data, with genes in rows and samples in columns. Gene IDs MUST be represented as Entres Gene IDs. }
@@ -22,19 +22,24 @@ MM2S_Human(InputMatrix,xls_output,parallelize)
 \item{RankMatrixTraining}{ssGSEA rank matrix of the trained MM2S human data, using selected genesets common between the test data and training set. These genesets are based on a filtered list using the top24 common genesets, for each subtype}
 }
 \references{
-Gendoo DMA, Smirnov P, Lupien M, Haibe-Kains B, (2014) "Personalized Diagnosis of Medulloblastoma Across Patients and Model Systems", \emph{Genomics}, \bold{14}(16):5158--5165.
+Gendoo, D. M., Smirnov, P., Lupien, M. & Haibe-Kains, B. Personalized diagnosis of medulloblastoma subtypes across patients and model systems. 
+Genomics, doi:10.1016/j.ygeno.2015.05.002 (2015)
+
+Manuscript URL: http://www.sciencedirect.com/science/article/pii/S0888754315000774
 }
 \author{
 Deena M.A. Gendoo
 }
 \seealso{
-\code{\link[MM2S]{MM2S_Mouse}},\code{\link[MM2S]{PredictionsHeatmap}},\code{\link[MM2S]{PCARender}}
+\code{\link[MM2S]{MM2S.mouse}},\code{\link[MM2S]{PredictionsHeatmap}},\code{\link[MM2S]{PCARender}}
 }
 \examples{
 ## load Human gene expression data containing selected samples from GSE37418
 data(Human_Cho_Expr)
-SubtypePreds<-MM2S_Human(InputMatrix=Human_Cho_Expr,xls_output=TRUE,parallelize=1)
+SubtypePreds<-MM2S.human(InputMatrix=Human_Cho_Expr[1:3],xls_output=TRUE,parallelize=2)
+
+#### Not Run
 ## Generate Heatmap of Predictions
-PredictionsHeatmap(InputMatrix=SubtypePreds$Predictions, pdf_output=TRUE,pdfheight=5,pdfwidth=5)
+## PredictionsHeatmap(InputMatrix=SubtypePreds$Predictions, pdf_output=TRUE,pdfheight=5,pdfwidth=5)
 }
 \keyword{ classification }

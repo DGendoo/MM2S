@@ -1,6 +1,18 @@
+# Deena M.A. Gendoo
+# October 29, 2014
+# Code to conduct MM2S predictions on mouse samples
+
+# DISCLAIMER:
+# MM2S package (and its code components) is provided "AS-IS" and without any warranty of any kind. 
+# In no event shall the University Health Network (UHN) or the authors be liable for any consequential damage of any kind, 
+# or any damages resulting from the use of MM2S.
+
+#################################################################################
+#################################################################################
+
 if(getRversion() >= "2.15.1")  utils::globalVariables(c("MouseGMT", "genesetHuman","en_ES_Rank_Matrix","MB_SampleInfo"))
 
-MM2S_Mouse<-function(InputMatrix,xls_output,parallelize)
+MM2S.mouse<-function(InputMatrix,xls_output,parallelize)
 {
   set.seed(12345)
   options(warn=-1)

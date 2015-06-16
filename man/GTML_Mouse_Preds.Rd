@@ -23,7 +23,10 @@ Gene Expression data of the GTML model was obtained from GSE36594 and normalized
 The table is an example of MM2S output for that  set of samples. 
 }
 \references{
-Gendoo DMA, Smirnov P, Lupien M, Haibe-Kains B, (2014) "Personalized Diagnosis of Medulloblastoma Across Patients and Model Systems", \emph{Genomics}, \bold{14}(16):5158--5165.
+Gendoo, D. M., Smirnov, P., Lupien, M. & Haibe-Kains, B. Personalized diagnosis of medulloblastoma subtypes across patients and model systems. 
+Genomics, doi:10.1016/j.ygeno.2015.05.002 (2015)
+
+Manuscript URL: http://www.sciencedirect.com/science/article/pii/S0888754315000774
 }
 \seealso{
 \code{\link[MM2S]{PredictionsHeatmap}}

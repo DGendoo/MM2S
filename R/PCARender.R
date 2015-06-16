@@ -1,3 +1,15 @@
+# Deena M.A. Gendoo
+# October 29, 2014
+# Code to conduct PCA projections of MM2S predicted (versus original designations) of MB subtypes
+
+# DISCLAIMER:
+# MM2S package (and its code components) is provided "AS-IS" and without any warranty of any kind. 
+# In no event shall the University Health Network (UHN) or the authors be liable for any consequential damage of any kind, 
+# or any damages resulting from the use of this MM2S.
+
+#################################################################################
+#################################################################################
+
 PCARender<-function(GSVAmatrixTesting,GSVAmatrixTraining)
 {
   message("Three PDFs have been generated, please consult your working directory to find them.")
