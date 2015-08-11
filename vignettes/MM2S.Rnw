@@ -4,6 +4,7 @@
 %\VignetteKeywords{Medulloblastoma, Diagnosis, Cancer, Subtype, Classification}
 %\VignettePackage{MM2S}
 %\VignetteEngine{knitr::knitr}
+
 \documentclass{article}
 \usepackage{graphicx}
 \usepackage{microtype}
@@ -74,9 +75,9 @@ The MM2Sdata package contains ExpressionSet objects of both Human and Mouse mode
 Please consult the manual of the MM2Sdata package for more details. 
 
 <<installAndLoadPackages,eval=TRUE>>=
-install.packages("MM2S")
+install.packages("MM2S", repos="http://cran.r-project.org")
 library(MM2S)
-install.packages("MM2Sdata")
+install.packages("MM2Sdata", repos="http://cran.r-project.org")
 library(MM2Sdata)
 @
 
