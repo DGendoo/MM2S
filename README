@@ -25,3 +25,9 @@ R CMD INSTALL MM2Sdata_1.0.1.tar.gz
 3. Load the libraries in R:
 library(MM2S)
 library(MM2Sdata)
+
+** To install dependencies of the package, please run the following in R:
+pp <- c("GSVA", "kknn", "lattice", "pheatmap")
+source("http://bioconductor.org/biocLite.R")
+myrepos <- biocinstallRepos()
+rr <- biocLite(pkgs=pp, dependencies=TRUE, type="source", destdir=".")
