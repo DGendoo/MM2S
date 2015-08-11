@@ -1,1 +1,25 @@
-The Medullo-Model To Subtypes (MM2S) classifier stratifies single MB gene expression profiles without reference samples or replicates. Our pathway-centric approach facilitates subtype predictions of patient samples, and model systems including cell lines and mouse models.  http://www.sciencedirect.com/science/article/pii/S0888754315000774 
+The Medullo-Model To Subtypes (MM2S) classifier stratifies single MB gene expression profiles without reference samples or replicates. Our pathway-centric approach facilitates subtype predictions of patient samples, and model systems including cell lines and mouse models.  
+The manuscript link is: http://www.sciencedirect.com/science/article/pii/S0888754315000774 
+
+The MM2S and MM2Sdata packages are available on CRAN as well as the Github:
+
+** To install the MM2S and the MM2Sdata packages, from within an R terminal, please type:
+
+install.packages("MM2S", repos="http://cran.r-project.org")
+library(MM2S)
+install.packages("MM2Sdata", repos="http://cran.r-project.org")
+library(MM2Sdata)
+
+** To install the MM2S and the MM2Sdata packages from source:
+
+1. Please first download the packages from CRAN:
+
+https://cran.r-project.org/web/packages/MM2S/index.html
+https://cran.r-project.org/web/packages/MM2Sdata/index.html
+
+2. Type in your terminal:
+R CMD INSTALL MM2S_1.0.3.tar.gz
+
+3. Load the libraries in R:
+library(MM2S)
+library(MM2Sdata)

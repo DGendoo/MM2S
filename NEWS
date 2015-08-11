@@ -1,3 +1,17 @@
+CHANGES IN VERSION 1.0.3
+-----------------------
+
+Update of vignette. Now a vignette PDF is readily available!
+
+CHANGES IN VERSION 1.0.2
+-----------------------
+
+Handled cases of undefined globals based on CRAN updates. 
+This included:
+- importing several packages (updated in the DESCRIPTION file), 
+- and updating the namespace file
+
+
 CHANGES IN VERSION 1.0.1
 -----------------------
 
