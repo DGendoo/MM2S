@@ -75,9 +75,9 @@ The MM2Sdata package contains ExpressionSet objects of both Human and Mouse mode
 Please consult the manual of the MM2Sdata package for more details. 
 
 <<installAndLoadPackages,eval=TRUE>>=
-install.packages("MM2S", repos="http://cran.r-project.org")
+#install.packages("MM2S", repos="http://cran.r-project.org")
 library(MM2S)
-install.packages("MM2Sdata", repos="http://cran.r-project.org")
+#install.packages("MM2Sdata", repos="http://cran.r-project.org")
 library(MM2Sdata)
 @
 
@@ -115,8 +115,29 @@ PredictionsHeatmap(InputMatrix=GTMLPreds$Predictions[1:20,],pdf_output=TRUE,pdfh
 # NB: Output may appear on multiple pages
 @
 
-We observe that the majority of sample replicates strongly predict as Group3, suggesting the potential for a non-SHH mouse model. 
-However, some samples also predict as either SHH or Normal. Further investigation would need to performed on these samples. 
+We can also represent them as a stacked barplot, instead. 
+<<GeneratePredictionBarplot,echo=TRUE>>=
+# Now generate a heatmap of the predictions and save the results in a PDF file.  
+# This indicates MM2S confidence perdictions for each sample replicate of the GMTL model. 
+# We view the samples here. 
+PredictionsBarplot(InputMatrix=GTMLPreds$Predictions[1:20,],pdf_output=TRUE,pdfheight=10,pdfwidth=10)
+# NB: Output may appear on multiple pages
+@
+
+We observe that the majority of sample replicates strongly predict as Group3, suggesting the potential for a non-SHH mouse model.
+
+We generate here an overview of the majority subtypes, across all sample replicates. 
+To do this we generate a pie chart of all the predictions. 
+<<PredictionDistributionPie,echo=TRUE>>=
+PredictionsDistributionPie(InputMatrix=GTMLPreds,pdf_output=TRUE,pdfheight=5,pdfwidth=5)
+@
+
+To assess further, we also plot the distribution of subtype calls, across all the samples. 
+<<PredictionDistributionBoxplot,echo=TRUE>>=
+PredictionsDistributionBoxplot(InputMatrix=GTMLPreds,pdf_output=FALSE)
+@
+
+Notably, some samples also predict as either SHH or Normal. Further investigation would need to performed on these samples. 
 To invesitage further, we can graphically visualize different sample replicates and their nearest human MB neighbors 
 from the MM2S training set using Principal Component Analysis (PCA). 
 
@@ -125,6 +146,7 @@ Three PDF files are generated which renders PC1 vs PC2, PC2 vs PC3, and a lattic
 PCARender(GSVAmatrixTesting=GTMLPreds$RankMatrixTesting, 
           GSVAmatrixTraining=GTMLPreds$RankMatrixTraining)
 @
+
 
 %------------------------------------------------------------
 %%% CODE Stop
