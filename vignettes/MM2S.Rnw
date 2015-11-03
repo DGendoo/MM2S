@@ -115,16 +115,14 @@ PredictionsHeatmap(InputMatrix=GTMLPreds$Predictions[1:20,],pdf_output=TRUE,pdfh
 # NB: Output may appear on multiple pages
 @
 
-We can also represent them as a stacked barplot, instead. 
-<<GeneratePredictionBarplot,echo=TRUE>>=
-# Now generate a heatmap of the predictions and save the results in a PDF file.  
-# This indicates MM2S confidence perdictions for each sample replicate of the GMTL model. 
-# We view the samples here. 
-PredictionsBarplot(InputMatrix=GTMLPreds$Predictions[1:20,],pdf_output=TRUE,pdfheight=10,pdfwidth=10)
+We can also represent the results as a stacked barplot. 
+<<GeneratePredictionBarplot,eval=FALSE,echo=TRUE>>=
+# To run the function all the GTML sample replicates, please run:
+# PredictionsBarplot(InputMatrix=GTMLPreds$Predictions[1:20,],pdf_output=TRUE,pdfheight=5,pdfwidth=12)
 # NB: Output may appear on multiple pages
 @
 
-We observe that the majority of sample replicates strongly predict as Group3, suggesting the potential for a non-SHH mouse model.
+Using the heatmap or the stacked barplot, we observe that the majority of sample replicates strongly predict as Group3, suggesting the potential for a non-SHH mouse model.
 
 We generate here an overview of the majority subtypes, across all sample replicates. 
 To do this we generate a pie chart of all the predictions. 

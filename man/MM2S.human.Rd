@@ -35,8 +35,8 @@ Deena M.A. Gendoo
 }
 \examples{
 ## load Human gene expression data containing selected samples from GSE37418
-data(Human_Cho_Expr)
-SubtypePreds<-MM2S.human(InputMatrix=Human_Cho_Expr[1:3],xls_output=TRUE,parallelize=2)
+# data(Human_Cho_Expr)
+# SubtypePreds<-MM2S.human(InputMatrix=Human_Cho_Expr[1:3],xls_output=TRUE,parallelize=2)
 
 #### Not Run
 ## Generate Heatmap of Predictions

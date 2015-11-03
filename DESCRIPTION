@@ -1,7 +1,7 @@
 Package: MM2S
 Type: Package
 Version: 1.0.4
-Date: 2015-10-26
+Date: 2015-11-02
 Title: Single-Sample Classifier of Medulloblastoma Subtypes for Medulloblastoma Patient Samples, Mouse Models, and Cell Lines 
 Description: R Package Providing Medulloblastoma Subtype predictions of Human Primary Patient Samples, Medulloblastoma Mouse Models, and Medulloblastoma Cell Lines. 
 Author: Deena M.A. Gendoo  <deena.gendoo@utoronto.ca>, Benjamin Haibe-Kains <benjamin.haibe.kains@utoronto.ca>

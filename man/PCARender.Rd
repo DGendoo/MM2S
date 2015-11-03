@@ -41,13 +41,13 @@ Deena M.A. Gendoo
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \examples{
-# Running raw expression data through MM2S
-## load Mouse gene expression data for the potential WNT mouse model
-data(WNT_Mouse_Expr)
-SubtypePreds<-MM2S.mouse(InputMatrix=WNT_Mouse_Expr[2:3],xls_output=TRUE,parallelize=1)
+## Running raw expression data through MM2S
+# load Mouse gene expression data for the potential WNT mouse model
+# data(WNT_Mouse_Expr)
+# SubtypePreds<-MM2S.mouse(InputMatrix=WNT_Mouse_Expr[2:3],xls_output=TRUE,parallelize=1)
 ## Generate Heatmap
-PCARender(GSVAmatrixTesting=SubtypePreds$RankMatrixTesting,
-GSVAmatrixTraining=SubtypePreds$RankMatrixTraining)
+#   PCARender(GSVAmatrixTesting=SubtypePreds$RankMatrixTesting,
+#         GSVAmatrixTraining=SubtypePreds$RankMatrixTraining)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
