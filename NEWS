@@ -2,6 +2,7 @@ CHANGES IN VERSION 1.0.4
 -----------------------
 
 Addition of Newer functions and Update of vignette. 
+I have also included a new vignette that shows how to process raw microarray data for testing with MM2S. 
 
 CHANGES IN VERSION 1.0.3
 -----------------------
