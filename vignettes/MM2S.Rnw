@@ -30,10 +30,12 @@
 \newcommand{\Rfunarg}[1]{{\texttt{#1}}}
 
 \begin{document}
+\let\oldraggedright\raggedright
+\renewcommand\raggedright{}
 
 \title{\Rpackage{MM2S}: a package for Medulloblastoma Subtype Predictions}
-\author[1]{Deena M.A. Gendoo\thanks{deena.gendoo@utoronto.ca}}
-\author[1]{Benjamin Haibe-Kains\thanks{benjamin.haibe.kains@utoronto.ca }}
+\author[1,2]{Deena M.A. Gendoo\thanks{deena.gendoo@utoronto.ca}}
+\author[1,2]{Benjamin Haibe-Kains\thanks{benjamin.haibe.kains@utoronto.ca }}
 \affil[1]{Bioinformatics and Computational Genomics Laboratory, Princess Margaret Cancer Center, University Health Network, Toronto, Ontario, Canada}
 \affil[2]{Medical Biophysics Department, University of Toronto, Toronto, Ontario, Canada}
 
@@ -76,9 +78,9 @@ Please consult the manual of the MM2Sdata package for more details.
 
 <<installAndLoadPackages,eval=TRUE>>=
 #install.packages("MM2S", repos="http://cran.r-project.org")
-library(MM2S)
+suppressPackageStartupMessages(library(MM2S))
 #install.packages("MM2Sdata", repos="http://cran.r-project.org")
-library(MM2Sdata)
+suppressPackageStartupMessages(library(MM2Sdata))
 @
 
 %------------------------------------------------------------
@@ -237,8 +239,8 @@ or any damages resulting from the use of MM2S.
 %------------------------------------------------------------
 \section{Session Info}
 %------------------------------------------------------------ 
-<<sessionInfo,echo=FALSE,results="tex">>==
-toLatex(sessionInfo())
+<<sessionInfo,echo=FALSE,results="asis">>==
+utils::toLatex(sessionInfo())
 @
-
+\let\raggedright\relax
 \end{document}
