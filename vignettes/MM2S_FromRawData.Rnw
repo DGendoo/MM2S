@@ -92,7 +92,7 @@ install.packages("affy_1.48.0.tar.gz",type = "source",repos=NULL)
 @
 
 We now load all the libraries:
-<<Load Libraries,eval=TRUE>>=
+<<Load Libraries,eval=FALSE>>=
 suppressPackageStartupMessages(library(MM2S))
 suppressPackageStartupMessages(library(affy))
 suppressPackageStartupMessages(library(Biobase))
@@ -101,13 +101,13 @@ suppressPackageStartupMessages(library(hgu133plus2hsentrezgcdf))
 @
 
 Next we download the cel files containing raw expression data into a folder. 
-<<getDataFromGEO,eval=TRUE>>=
+<<getDataFromGEO,eval=FALSE>>=
 gse<-getGEOSuppFiles(GEO = "GSE37418")
 untar(tarfile = "./GSE37418/GSE37418_RAW.tar",exdir = "CelFiles")
 @
 
 We process the downloaded cell files and normalize the gene expression values using BrainArray CDF. 
-<<cleanAndNormalize,eval=TRUE>>=
+<<cleanAndNormalize,eval=FALSE>>=
 
 # Generate the Affy Expression Object
 affyRaw <- ReadAffy(celfile.path = "CelFiles",verbose = F,
@@ -131,14 +131,14 @@ ExprMatrix<-datamatrix
 
 Now we can use this data and run several MM2S functions to determine the MB subtypes of given samples. 
 We first perform MM2S predictions on a subset of the samples for demonstration. 
-<<findHumanModelSubtypes>>=
+<<findHumanModelSubtypes,eval=FALSE>>=
 # Conduct Subtype Predictions the samples, save results in a XLS file
 HumanPreds<-MM2S.human(InputMatrix=ExprMatrix[,1:10],xls_output=FALSE,parallelize=4)
 @
 
 Now these predictions can be viewed using a variety of MM2S functions. 
 Here we generate a heatmap of MM2S confidence predictions for the 10 samples we have tested. 
-<<GeneratePredictionHeatmap,echo=TRUE>>=
+<<GeneratePredictionHeatmap,echo=TRUE,eval=FALSE>>=
 # Now generate a heatmap of the predictions and save the results in a PDF file.  
 # This indicates MM2S confidence perdictions for each sample . 
 # We view the samples here. 
@@ -186,7 +186,7 @@ or any damages resulting from the use of MM2S.
 %------------------------------------------------------------
 \section{Session Info}
 %------------------------------------------------------------ 
-<<sessionInfo,echo=FALSE,results="asis">>==
+<<sessionInfo,echo=FALSE,results="asis",eval=FALSE>>==
 utils::toLatex(sessionInfo())
 @
 \let\raggedright\relax
