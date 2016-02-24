@@ -1,4 +1,4 @@
-%\VignetteIndexEntry{MM2S An Introduction (HowTo)}
+%\VignetteIndexEntry{MM2S An Introduction (HowTo) from Raw Data}
 %\VignetteDepends{GSVA, kknn, lattice, pheatmap}
 %\VignetteSuggests{MM2Sdata}
 %\VignetteKeywords{Medulloblastoma, Diagnosis, Cancer, Subtype, Classification}
